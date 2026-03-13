@@ -2,8 +2,11 @@ name: Update remote file
 
 on:
   schedule:
-    - cron: "*/30 * * * *"   # каждые 30 минут
+    - cron: "*/30 * * * *"
   workflow_dispatch:
+
+permissions:
+  contents: write
 
 jobs:
   update:
@@ -15,14 +18,7 @@ jobs:
 
       - name: Download file
         run: |
-          URL="https://raw.githubusercontent.com/zieng2/wl/refs/heads/main/vless_lite.txt"
-          OUTPUT="my_file.txt"
-
-          for i in {1..5}; do
-            curl -L $URL -o $OUTPUT && break
-            echo "Download failed, retry in 60 seconds"
-            sleep 60
-          done
+          curl -L https://raw.githubusercontent.com/zieng2/wl/refs/heads/main/vless_lite.txt -o my_file.txt
 
       - name: Commit and push
         run: |
@@ -31,6 +27,6 @@ jobs:
           git config user.name "github-actions"
           git config user.email "github-actions@github.com"
 
-          git add my_file.txt
+          git add wlvl.txt
           git commit -m "Auto update: $DATE" || echo "No changes"
           git push
