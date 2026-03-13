@@ -18,7 +18,7 @@ jobs:
 
       - name: Download file
         run: |
-          curl -L https://raw.githubusercontent.com/zieng2/wl/refs/heads/main/vless_lite.txt -o my_file.txt
+          curl -L https://raw.githubusercontent.com/zieng2/wl/refs/heads/main/vless_lite.txt -o wlvl.txt
 
       - name: Commit and push
         run: |
